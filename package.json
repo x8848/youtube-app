@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:image": "docker build . -t youtube-app",
+    "docker:start": "docker run -dp 3000:3000 youtube-app",
+    "docker:stop": "docker stop $(docker ps -a -q)"
   },
   "dependencies": {
     "@types/node": "20.4.2",
