@@ -16,4 +16,4 @@
 
 - `yarn docker:image` - create Docker image `youtube-app`
 - `yarn docker:start` - start Docker image `youtube-app` container
-- `yarn docker:stop` - start all Docker containers
+- `yarn docker:stop` - stop all Docker containers
