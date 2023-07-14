@@ -1,4 +1,5 @@
-import { MAX_PLAYLISTS_COUNT, YOUTUBE_API_URL } from '@/utils'
+import { HTTP_STATUS_OK, MAX_PLAYLISTS_COUNT } from '@/utils'
+import { YouTubeApiUrl } from '@/utils/enums'
 import { ChannelProps } from '@/utils/types'
 import { FC } from 'react'
 
@@ -14,8 +15,8 @@ const Channel: FC<ChannelProps> = ({ channel, apiKey, setChannel }) => {
         pageToken: channel.nextPageToken,
         part: 'snippet,contentDetails',
       })
-      const response = await fetch(YOUTUBE_API_URL + '/playlists?' + urlParams)
-      if (response.status === 200) {
+      const response = await fetch(YouTubeApiUrl.Playlists + '?' + urlParams)
+      if (response.status === HTTP_STATUS_OK) {
         const data = await response.json()
         const playlists = data?.items || []
         setChannel({ ...channel, playlists: [...channel.playlists, ...playlists], nextPageToken: data.nextPageToken })

@@ -1,6 +1,7 @@
 'use client'
 
-import { HTTP_STATUS_OK, MAX_PLAYLISTS_COUNT, YOUTUBE_API_URL } from '@/utils'
+import { HTTP_STATUS_OK, MAX_PLAYLISTS_COUNT } from '@/utils'
+import { YouTubeApiUrl } from '@/utils/enums'
 import { YouTubeChannel } from '@/utils/types'
 import { FormEvent, useState } from 'react'
 import Channel from './components/Channel'
@@ -21,7 +22,7 @@ const Home = () => {
     const formData = new FormData(event.target as HTMLFormElement)
     const formProps = Object.fromEntries(formData) as { key: string; forUsername: string }
     const urlParams = new URLSearchParams({ ...formProps, part: 'snippet,contentDetails,statistics' })
-    const response = await fetch(YOUTUBE_API_URL + '/channels?' + urlParams)
+    const response = await fetch(YouTubeApiUrl.Channels + '?' + urlParams)
     if (response.status === HTTP_STATUS_OK) {
       const data = await response.json()
       if (data?.pageInfo?.totalResults == 1) {
@@ -32,7 +33,7 @@ const Home = () => {
           maxResults: MAX_PLAYLISTS_COUNT,
           part: 'snippet,contentDetails',
         })
-        const response = await fetch(YOUTUBE_API_URL + '/playlists?' + urlParams)
+        const response = await fetch(YouTubeApiUrl.Playlists + '?' + urlParams)
         if (response.status === HTTP_STATUS_OK) {
           const data = await response.json()
           setApiKey(formProps.key)
